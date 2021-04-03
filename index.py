@@ -4,28 +4,26 @@
 # b   c         c   b
 
 
-def showBinaryTree(head):
+def showBinaryTree(head, level=0):
     current = head
-    print(current.value)
+    print(level,' - ',current.value)
 
     if(current.left != None):
-        showBinaryTree(current.left)
+        showBinaryTree(current.left, level+1)
 
     if(current.right != None):
-        showBinaryTree(current.right)
+        showBinaryTree(current.right, level+1)
 
 def invertBinaryTree(head):
-    current = head
+    if(head == None):
+        return
 
-    auxNode = current.right
-    current.right = current.left
-    current.left = auxNode
+    auxNode = head.right
+    head.right = head.left
+    head.left = auxNode
 
-    if(current.left != None):
-        invertBinaryTree(current.left)
-
-    if(current.right != None):
-        invertBinaryTree(current.right)
+    invertBinaryTree(head.left)
+    invertBinaryTree(head.right)
 
 class BinaryTree:
     def __init__(self, value):
